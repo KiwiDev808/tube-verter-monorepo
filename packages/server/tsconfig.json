@@ -4,7 +4,7 @@
     "lib": ["esnext"],
     "allowJs": false,
     "checkJs": false,
-    "outDir": ""
+    "outDir": "./dist"
   },
   "include": ["./src/**/*"]
 }
