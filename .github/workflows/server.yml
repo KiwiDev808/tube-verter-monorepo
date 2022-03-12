@@ -1,0 +1,31 @@
+on:
+  push:
+    branches: [main]
+    paths:
+      - packages/server/**
+      - '*.json'
+      - '*.js'
+      - .github/workflows/server.yaml
+  pull_request:
+    branches: [main]
+    paths:
+      - packages/server/**
+      - '*.json'
+      - '*.js'
+      - .github/workflows/server.yaml
+
+jobs:
+  ts:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/server
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: yarn
+      - run: yarn
+      - run: yarn lint
+      - run: yarn test
