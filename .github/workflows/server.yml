@@ -15,7 +15,7 @@ on:
       - .github/workflows/server.yml
 
 jobs:
-  ts:
+  build:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -32,7 +32,17 @@ jobs:
         run: yarn  lint
       - name: Run All Tests
         run: yarn test
-      - name: Add backend remote origin
-        run: git remote add heroku-backend https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-      - name: Deploy backend to Heroku
-        run: git push heroku-backend --force
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/server
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: 'lucasbacela@hotmail.com'
+          appdir: 'packages/server'
