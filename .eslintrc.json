@@ -17,11 +17,9 @@
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
-    "plugin:prettier/recommended",
-    "eslint:recommended"
+    "plugin:prettier/recommended"
   ],
   "rules": {
-    "no-unused-vars": "warn",
     "import/prefer-default-export": "off"
   },
   "settings": {
