@@ -26,6 +26,17 @@ jobs:
         with:
           node-version: 16
           cache: yarn
-      - run: yarn
-      - run: yarn lint
-      - run: yarn test
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile
+      - name: Lint
+        run: yarn lint
+      - name: Run All Tests
+        run: yarn test
+      - name: Deploy application
+        if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'tube-verter-1'
+          heroku_email: 'lucasbacela@hotmail.com'
+          buildpack: 'https://github.com/zidizei/heroku-buildpack-tsc#v2.0'
