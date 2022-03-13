@@ -5,14 +5,14 @@ on:
       - packages/server/**
       - '*.json'
       - '*.js'
-      - .github/workflows/server.yaml
+      - .github/workflows/server.yml
   pull_request:
     branches: [main]
     paths:
       - packages/server/**
       - '*.json'
       - '*.js'
-      - .github/workflows/server.yaml
+      - .github/workflows/server.yml
 
 jobs:
   ts:
